@@ -3,11 +3,11 @@ module MobileHelper
 
   module Apple
     def apple_app_capable_meta_tag
-      meta_tag 'apple-mobile-web-app-capable', 'yes'
+      # meta_tag 'apple-mobile-web-app-capable', 'yes'
     end
 
     def apple_app_icon_link_tag
-      link_tag 'apple-touch-icon', image_path('icon.png')
+      # link_tag 'apple-touch-icon', image_path('icon.png')
     end
   end
   include Apple

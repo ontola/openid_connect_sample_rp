@@ -2,11 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title><%= 'site.title'.t %> - <%= 'site.description'.t %></title>
-    <%= stylesheet_link_tag :all %>
+    <title><%= I18n.t('site.title') %> - <%= I18n.t('site.description') %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
     <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js' %>
-    <%= javascript_include_tag :all %>
-    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= viewport_meta_tag %>
     <%= apple_app_capable_meta_tag %>
     <%= apple_app_icon_link_tag %>

@@ -1,17 +1,17 @@
 <section>
   <h2>
-    <%= 'accounts.title'.t(name: @userinfo.name) %>
+    <%= I18n.t('accounts.title', name: @userinfo.name) %>
   </h2>
   <article>
-    <h3><%= 'open_id.access_token.title'.t %></h3>
+    <h3><%= I18n.t('open_id.access_token.title') %></h3>
     <pre><%= @open_id.access_token %></pre>
   </article>
   <article>
-    <h3><%= 'open_id.userinfo.title'.t %></h3>
+    <h3><%= I18n.t('open_id.userinfo.title') %></h3>
     <pre><%= JSON.pretty_generate @userinfo.as_json(skip_validation: true) %></pre>
     <% unless @userinfo.valid? %>
       <dl class="errors">
-        <dt><%= 'open_id.userinfo.errors'.t %></dt>
+        <dt><%= I18n.t('open_id.userinfo.errors') %></dt>
         <% @userinfo.errors.full_messages.each do |error| %>
           <dd><%= error %></dd>
         <% end %>
@@ -19,7 +19,7 @@
     <% end %>
   </article>
   <article>
-    <h3><%= 'open_id.id_token.title'.t %></h3>
+    <h3><%= I18n.t('open_id.id_token.title') %></h3>
     <pre class="jwt"><%= @open_id.id_token %></pre>
     <pre><%= JSON.pretty_generate @open_id.check_id!.as_json %></pre>
   </article>

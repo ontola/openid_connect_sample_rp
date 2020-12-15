@@ -1,6 +1,6 @@
 class OpenId < ActiveRecord::Base
-  belongs_to :account
-  belongs_to :provider
+  belongs_to :account, optional: true
+  belongs_to :provider, optional: true
 
   validates :identifier, uniqueness: {scope: :provider_id}
 

@@ -2,7 +2,7 @@ class Provider < ActiveRecord::Base
   serialize :scopes_supported, JSON
 
   has_many :open_ids
-  belongs_to :account
+  belongs_to :account, optional: true
 
   validates :issuer,                 presence: true, uniqueness: {allow_nil: true}
   validates :name,                   presence: true
@@ -11,8 +11,8 @@ class Provider < ActiveRecord::Base
   validates :token_endpoint,         presence: {if: :registered?}
   validates :userinfo_endpoint,      presence: {if: :registered?}
 
-  scope :dynamic,  where(dynamic: true)
-  scope :listable, where(dynamic: false)
+  scope :dynamic, -> { where(dynamic: true) }
+  scope :listable, -> { where(dynamic: false) }
   scope :valid, lambda {
     where {
       (expires_at == nil) |
@@ -119,7 +119,7 @@ class Provider < ActiveRecord::Base
       client_id: identifier,
       nonce: nonce
     )
-    open_id = self.open_ids.find_or_initialize_by_identifier _id_token_.subject
+    open_id = self.open_ids.find_or_initialize_by(identifier: _id_token_.subject)
     open_id.access_token, open_id.id_token = access_token.access_token, access_token.id_token
     open_id.save!
     open_id.account || Account.create!(open_id: open_id)
